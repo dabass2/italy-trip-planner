@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { getAllPlaces } from "#/utils/places.functions";
+import { placesQueryOptions } from "#/utils/places.functions";
 import {
 	Card,
 	CardContent,
@@ -10,12 +9,7 @@ import {
 } from "./ui/card";
 
 export function PlaceList() {
-	const allPlaces = useServerFn(getAllPlaces);
-
-	const { data, isLoading, isError } = useQuery({
-		queryKey: ["places"],
-		queryFn: () => allPlaces(),
-	});
+	const { data, isLoading, isError } = useQuery(placesQueryOptions);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
