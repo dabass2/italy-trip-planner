@@ -28,6 +28,8 @@ function FitBounds({ points }: { points: LatLngTuple[] }) {
 export default function PlanMapClient({ places }: { places: Place[] }) {
 	const points = places.map((p): LatLngTuple => [p.latitude, p.longitude]);
 
+	const mapPinColor = "var(--color-blushed-brick)";
+
 	return (
 		<MapContainer
 			center={ITALY_CENTER}
@@ -43,7 +45,7 @@ export default function PlanMapClient({ places }: { places: Place[] }) {
 					key={place.placeId}
 					center={[place.latitude, place.longitude]}
 					radius={7}
-					pathOptions={{ color: "#328f97", fillOpacity: 0.7 }}
+					pathOptions={{ color: mapPinColor, fillOpacity: 1 }}
 				>
 					<Popup>
 						<strong>{place.name}</strong>
