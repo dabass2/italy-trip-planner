@@ -1,0 +1,601 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "places": {
+      "name": "places",
+      "columns": {
+        "place_id": {
+          "autoincrement": false,
+          "name": "place_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region": {
+          "autoincrement": false,
+          "name": "region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "neighborhood": {
+          "autoincrement": false,
+          "name": "neighborhood",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "autoincrement": false,
+          "name": "latitude",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "longitude": {
+          "autoincrement": false,
+          "name": "longitude",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duration_minutes": {
+          "autoincrement": false,
+          "name": "duration_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_level": {
+          "autoincrement": false,
+          "name": "price_level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price_range": {
+          "autoincrement": false,
+          "name": "price_range",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rating": {
+          "autoincrement": false,
+          "name": "rating",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "booking_required": {
+          "autoincrement": false,
+          "name": "booking_required",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hours_text": {
+          "autoincrement": false,
+          "name": "hours_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hours_status": {
+          "autoincrement": false,
+          "name": "hours_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hours_approx": {
+          "autoincrement": false,
+          "name": "hours_approx",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hours_days_specified": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "hours_days_specified",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "seasonal_notes": {
+          "autoincrement": false,
+          "name": "seasonal_notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_places_type": {
+          "name": "idx_places_type",
+          "columns": [
+            "type"
+          ],
+          "isUnique": false
+        },
+        "idx_places_city": {
+          "name": "idx_places_city",
+          "columns": [
+            "city"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "places_check_1": {
+          "name": "places_check_1",
+          "value": "latitude  BETWEEN 35 AND 48"
+        },
+        "places_check_2": {
+          "name": "places_check_2",
+          "value": "longitude BETWEEN 6 AND 19"
+        },
+        "places_check_3": {
+          "name": "places_check_3",
+          "value": "duration_minutes > 0"
+        },
+        "places_check_4": {
+          "name": "places_check_4",
+          "value": "price_level BETWEEN 1 AND 4"
+        },
+        "places_check_5": {
+          "name": "places_check_5",
+          "value": "rating BETWEEN 0 AND 5"
+        },
+        "places_check_6": {
+          "name": "places_check_6",
+          "value": "booking_required IN (0, 1"
+        },
+        "places_check_7": {
+          "name": "places_check_7",
+          "value": "hours_status IN ('scheduled','approximate','unknown'"
+        },
+        "opening_hours_check_8": {
+          "name": "opening_hours_check_8",
+          "value": "weekday BETWEEN 0 AND 6"
+        },
+        "opening_hours_check_9": {
+          "name": "opening_hours_check_9",
+          "value": "closes_next_day IN (0, 1"
+        }
+      }
+    },
+    "tags": {
+      "name": "tags",
+      "columns": {
+        "tag_id": {
+          "autoincrement": false,
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "tag": {
+          "autoincrement": false,
+          "name": "tag",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "places_check_1": {
+          "name": "places_check_1",
+          "value": "latitude  BETWEEN 35 AND 48"
+        },
+        "places_check_2": {
+          "name": "places_check_2",
+          "value": "longitude BETWEEN 6 AND 19"
+        },
+        "places_check_3": {
+          "name": "places_check_3",
+          "value": "duration_minutes > 0"
+        },
+        "places_check_4": {
+          "name": "places_check_4",
+          "value": "price_level BETWEEN 1 AND 4"
+        },
+        "places_check_5": {
+          "name": "places_check_5",
+          "value": "rating BETWEEN 0 AND 5"
+        },
+        "places_check_6": {
+          "name": "places_check_6",
+          "value": "booking_required IN (0, 1"
+        },
+        "places_check_7": {
+          "name": "places_check_7",
+          "value": "hours_status IN ('scheduled','approximate','unknown'"
+        },
+        "opening_hours_check_8": {
+          "name": "opening_hours_check_8",
+          "value": "weekday BETWEEN 0 AND 6"
+        },
+        "opening_hours_check_9": {
+          "name": "opening_hours_check_9",
+          "value": "closes_next_day IN (0, 1"
+        }
+      }
+    },
+    "place_tags": {
+      "name": "place_tags",
+      "columns": {
+        "place_id": {
+          "autoincrement": false,
+          "name": "place_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tag_id": {
+          "autoincrement": false,
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "autoincrement": false,
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "place_tags_place_id_tag_id_pk": {
+          "columns": [
+            "place_id",
+            "tag_id"
+          ],
+          "name": "place_tags_place_id_tag_id_pk"
+        }
+      },
+      "indexes": {
+        "idx_place_tags_tag": {
+          "name": "idx_place_tags_tag",
+          "columns": [
+            "tag_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "place_tags_tag_id_tags_tag_id_fk": {
+          "name": "place_tags_tag_id_tags_tag_id_fk",
+          "tableFrom": "place_tags",
+          "tableTo": "tags",
+          "columnsFrom": [
+            "tag_id"
+          ],
+          "columnsTo": [
+            "tag_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "place_tags_place_id_places_place_id_fk": {
+          "name": "place_tags_place_id_places_place_id_fk",
+          "tableFrom": "place_tags",
+          "tableTo": "places",
+          "columnsFrom": [
+            "place_id"
+          ],
+          "columnsTo": [
+            "place_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "places_check_1": {
+          "name": "places_check_1",
+          "value": "latitude  BETWEEN 35 AND 48"
+        },
+        "places_check_2": {
+          "name": "places_check_2",
+          "value": "longitude BETWEEN 6 AND 19"
+        },
+        "places_check_3": {
+          "name": "places_check_3",
+          "value": "duration_minutes > 0"
+        },
+        "places_check_4": {
+          "name": "places_check_4",
+          "value": "price_level BETWEEN 1 AND 4"
+        },
+        "places_check_5": {
+          "name": "places_check_5",
+          "value": "rating BETWEEN 0 AND 5"
+        },
+        "places_check_6": {
+          "name": "places_check_6",
+          "value": "booking_required IN (0, 1"
+        },
+        "places_check_7": {
+          "name": "places_check_7",
+          "value": "hours_status IN ('scheduled','approximate','unknown'"
+        },
+        "opening_hours_check_8": {
+          "name": "opening_hours_check_8",
+          "value": "weekday BETWEEN 0 AND 6"
+        },
+        "opening_hours_check_9": {
+          "name": "opening_hours_check_9",
+          "value": "closes_next_day IN (0, 1"
+        }
+      }
+    },
+    "opening_hours": {
+      "name": "opening_hours",
+      "columns": {
+        "place_id": {
+          "autoincrement": false,
+          "name": "place_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "weekday": {
+          "autoincrement": false,
+          "name": "weekday",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "weekday_name": {
+          "autoincrement": false,
+          "name": "weekday_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "open_minute": {
+          "autoincrement": false,
+          "name": "open_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "close_minute": {
+          "autoincrement": false,
+          "name": "close_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "open_time": {
+          "autoincrement": false,
+          "name": "open_time",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "close_time": {
+          "autoincrement": false,
+          "name": "close_time",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "closes_next_day": {
+          "autoincrement": false,
+          "name": "closes_next_day",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "opening_hours_place_id_weekday_open_minute_pk": {
+          "columns": [
+            "place_id",
+            "weekday",
+            "open_minute"
+          ],
+          "name": "opening_hours_place_id_weekday_open_minute_pk"
+        }
+      },
+      "indexes": {
+        "idx_hours_day": {
+          "name": "idx_hours_day",
+          "columns": [
+            "weekday",
+            "open_minute",
+            "close_minute"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "opening_hours_place_id_places_place_id_fk": {
+          "name": "opening_hours_place_id_places_place_id_fk",
+          "tableFrom": "opening_hours",
+          "tableTo": "places",
+          "columnsFrom": [
+            "place_id"
+          ],
+          "columnsTo": [
+            "place_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "places_check_1": {
+          "name": "places_check_1",
+          "value": "latitude  BETWEEN 35 AND 48"
+        },
+        "places_check_2": {
+          "name": "places_check_2",
+          "value": "longitude BETWEEN 6 AND 19"
+        },
+        "places_check_3": {
+          "name": "places_check_3",
+          "value": "duration_minutes > 0"
+        },
+        "places_check_4": {
+          "name": "places_check_4",
+          "value": "price_level BETWEEN 1 AND 4"
+        },
+        "places_check_5": {
+          "name": "places_check_5",
+          "value": "rating BETWEEN 0 AND 5"
+        },
+        "places_check_6": {
+          "name": "places_check_6",
+          "value": "booking_required IN (0, 1"
+        },
+        "places_check_7": {
+          "name": "places_check_7",
+          "value": "hours_status IN ('scheduled','approximate','unknown'"
+        },
+        "opening_hours_check_8": {
+          "name": "opening_hours_check_8",
+          "value": "weekday BETWEEN 0 AND 6"
+        },
+        "opening_hours_check_9": {
+          "name": "opening_hours_check_9",
+          "value": "closes_next_day IN (0, 1"
+        }
+      }
+    },
+    "data_fixes": {
+      "name": "data_fixes",
+      "columns": {
+        "place_id": {
+          "autoincrement": false,
+          "name": "place_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "field": {
+          "autoincrement": false,
+          "name": "field",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "old_value": {
+          "autoincrement": false,
+          "name": "old_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "new_value": {
+          "autoincrement": false,
+          "name": "new_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reason": {
+          "autoincrement": false,
+          "name": "reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "places_check_1": {
+          "name": "places_check_1",
+          "value": "latitude  BETWEEN 35 AND 48"
+        },
+        "places_check_2": {
+          "name": "places_check_2",
+          "value": "longitude BETWEEN 6 AND 19"
+        },
+        "places_check_3": {
+          "name": "places_check_3",
+          "value": "duration_minutes > 0"
+        },
+        "places_check_4": {
+          "name": "places_check_4",
+          "value": "price_level BETWEEN 1 AND 4"
+        },
+        "places_check_5": {
+          "name": "places_check_5",
+          "value": "rating BETWEEN 0 AND 5"
+        },
+        "places_check_6": {
+          "name": "places_check_6",
+          "value": "booking_required IN (0, 1"
+        },
+        "places_check_7": {
+          "name": "places_check_7",
+          "value": "hours_status IN ('scheduled','approximate','unknown'"
+        },
+        "opening_hours_check_8": {
+          "name": "opening_hours_check_8",
+          "value": "weekday BETWEEN 0 AND 6"
+        },
+        "opening_hours_check_9": {
+          "name": "opening_hours_check_9",
+          "value": "closes_next_day IN (0, 1"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
