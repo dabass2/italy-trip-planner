@@ -1,7 +1,17 @@
 import { cn } from "cn";
+import { Plus } from "lucide-react";
 import type { places } from "#/db/schema";
 import { PriceLevel } from "./PriceLevel";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "./ui/card";
 
 type Place = typeof places.$inferSelect;
 
@@ -34,35 +44,42 @@ function toneFor(type: string) {
 
 export function PlaceCard({
 	place,
-	index,
 	selected = false,
 	onSelect,
 }: {
 	place: Place;
-	index: number;
 	selected?: boolean;
 	onSelect?: () => void;
 }) {
 	const tone = toneFor(place.type);
 
 	return (
-		<button
-			type="button"
-			onClick={onSelect}
+		<Card
+			role="button"
+			tabIndex={0}
 			aria-pressed={selected}
+			onClick={onSelect}
+			onKeyDown={(e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					onSelect?.();
+				}
+			}}
 			className={cn(
-				"flex w-full gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color]",
+				"cursor-pointer gap-2 rounded-2xl py-4 shadow-none transition-[background-color,border-color]",
 				selected
 					? "border-foreground bg-surface-raised"
 					: "border-transparent bg-surface hover:border-olive-leaf-200",
 			)}
 		>
-			<div className="flex min-w-0 flex-1 flex-col gap-2">
-				<div className="flex items-baseline justify-between gap-2">
-					<h3 className="truncate text-lg font-bold">{place.name}</h3>
+			<CardHeader>
+				<CardTitle className="truncate text-lg font-bold">
+					{place.name}
+				</CardTitle>
+				<CardAction>
 					<PriceLevel level={place.priceLevel} />
-				</div>
-				<div className="flex min-w-0 items-center gap-2 text-sm text-muted-foreground">
+				</CardAction>
+				<CardDescription className="flex min-w-0 items-center gap-2">
 					<Badge
 						className={cn("px-2 py-1 uppercase tracking-widest", tone.badge)}
 					>
@@ -71,11 +88,23 @@ export function PlaceCard({
 					<span className="truncate">
 						{place.city} · {place.hoursText ?? "Anytime"}
 					</span>
-				</div>
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
 				<p className={!selected ? "truncate" : undefined}>
 					{place.description}
 				</p>
-			</div>
-		</button>
+			</CardContent>
+			<CardAction className="flex items-center justify-between gap-2 px-4 w-full">
+				<Button
+					variant="secondary"
+					className="self-end"
+					onClick={(e) => e.stopPropagation()}
+				>
+					<Plus />
+					Add To Plan
+				</Button>
+			</CardAction>
+		</Card>
 	);
 }

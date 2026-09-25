@@ -47,7 +47,6 @@ export function PlaceList() {
 					<PlaceCard
 						key={place.placeId}
 						place={place}
-						index={i + 1}
 						selected={place.placeId === selectedId}
 						onSelect={() => setSelectedId(place.placeId)}
 					/>
