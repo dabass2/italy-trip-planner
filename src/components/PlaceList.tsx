@@ -87,7 +87,7 @@ export function PlaceList() {
 				</div>
 			</div>
 
-			<div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto scrollbar-track-transparent">
+			<div className="relative flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto scrollbar-track-transparent">
 				{filteredPlaces.map((place) => (
 					<PlaceCard
 						key={place.placeId}

@@ -76,7 +76,7 @@ export function PlaceCard({
 					{place.name}
 				</CardTitle>
 				<CardAction>
-					<PriceLevel level={place.priceLevel} />
+					<PriceLevel level={place.priceLevel} /> · {place.rating} ★
 				</CardAction>
 				<CardDescription className="flex flex-col min-w-0 gap-2">
 					<Badge className={cn("uppercase", tone.badge)}>

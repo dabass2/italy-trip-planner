@@ -3,12 +3,15 @@ import { PlaceList } from "#/components/PlaceList";
 import { PlanMap } from "#/components/PlanMap";
 import { PlanViewer } from "#/components/PlanViewer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "#/components/ui/tabs";
+import { appActions, useAppState } from "#/lib/app-store";
 
 export const Route = createFileRoute("/planner")({
 	component: Planner,
 });
 
 function Planner() {
+	const currentTab = useAppState((s) => s.currentTab);
+
 	return (
 		<div className="grid grid-cols-12 gap-4 m-4 h-[calc(100dvh-2rem)]">
 			<div className="col-span-8 min-h-0">
@@ -16,12 +19,18 @@ function Planner() {
 			</div>
 			<div className="col-span-4 min-h-0 min-w-0">
 				<div className="border border-olive-leaf rounded-2xl p-4 h-full">
-					<Tabs defaultValue="plan" className="h-full">
+					<Tabs
+						value={currentTab}
+						className="h-full"
+						onValueChange={(value) =>
+							appActions.setTab(value as "plan" | "places")
+						}
+					>
 						<TabsList>
 							<TabsTrigger value="plan">Itinerary</TabsTrigger>
 							<TabsTrigger value="places">Places</TabsTrigger>
 						</TabsList>
-						<TabsContent value="plan">
+						<TabsContent value="plan" className="min-h-0">
 							<PlanViewer />
 						</TabsContent>
 						<TabsContent value="places" className="min-h-0">

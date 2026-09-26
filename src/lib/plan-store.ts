@@ -47,7 +47,7 @@ export const planStore = new Store<
 		moveStop: (dayId: number, stopId: string, moveDirection: -1 | 1) => void;
 		clearPlan: () => void;
 	}
->(initialState(), ({ setState, get }) => ({
+>(initialState(), ({ setState }) => ({
 	addStop: (placeId, targetDayId) => {
 		const newStop: PlanStop = { id: crypto.randomUUID(), placeId };
 

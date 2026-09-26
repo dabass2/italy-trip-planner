@@ -12,7 +12,13 @@ import {
 
 const stop = (e: SyntheticEvent) => e.stopPropagation();
 
-export function AddToPlanMenu({ placeId }: { placeId: string }) {
+export function AddToPlanMenu({
+	placeId,
+	inlineView,
+}: {
+	placeId: string;
+	inlineView?: boolean;
+}) {
 	const days = usePlan((s) => s.days);
 
 	const plannedDays = days.flatMap((day, i) =>
@@ -20,10 +26,16 @@ export function AddToPlanMenu({ placeId }: { placeId: string }) {
 	);
 	const isPlanned = plannedDays.length > 0;
 
+	const buttonVariant = inlineView
+		? "ghost"
+		: isPlanned
+			? "outline"
+			: "secondary";
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild onClick={stop} onKeyDown={stop}>
-				<Button variant={isPlanned ? "outline" : "secondary"}>
+				<Button variant={buttonVariant} className="p-0">
 					{isPlanned ? <Check /> : <Plus />}
 					{isPlanned ? `In Day ${plannedDays.join(", ")}` : "Add To Plan"}
 					<ChevronDown />
