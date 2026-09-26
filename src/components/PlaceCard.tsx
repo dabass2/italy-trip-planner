@@ -1,9 +1,8 @@
 import { cn } from "cn";
-import { Plus } from "lucide-react";
 import type { places } from "#/db/schema";
+import { AddToPlanMenu } from "./AddToPlanMenu";
 import { PriceLevel } from "./PriceLevel";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 import {
 	Card,
 	CardAction,
@@ -97,10 +96,7 @@ export function PlaceCard({
 				</p>
 			</CardContent>
 			<CardAction className="flex items-center justify-end px-4 w-full">
-				<Button variant="secondary" onClick={(e) => e.stopPropagation()}>
-					<Plus />
-					Add To Plan
-				</Button>
+				<AddToPlanMenu placeId={place.placeId} />
 			</CardAction>
 		</Card>
 	);
