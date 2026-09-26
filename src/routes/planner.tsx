@@ -13,12 +13,13 @@ function Planner() {
 	const currentTab = useAppState((s) => s.currentTab);
 
 	return (
-		<div className="grid grid-cols-12 gap-4 m-4 h-[calc(100dvh-2rem)]">
-			<div className="col-span-8 min-h-0">
+		// Small screens stack the map above the panel; wider ones sit side by side.
+		<div className="flex flex-col gap-2 m-2 h-[calc(100dvh-1rem)] md:grid md:grid-cols-12 md:gap-4 md:m-4 md:h-[calc(100dvh-2rem)]">
+			<div className="h-[40dvh] shrink-0 md:h-auto md:col-span-7 md:min-h-0 lg:col-span-8">
 				<PlanMap />
 			</div>
-			<div className="col-span-4 min-h-0 min-w-0">
-				<div className="border border-olive-leaf rounded-2xl p-4 h-full">
+			<div className="flex-1 min-h-0 min-w-0 md:col-span-5 lg:col-span-4">
+				<div className="border border-olive-leaf rounded-2xl p-3 h-full md:p-4">
 					<Tabs
 						value={currentTab}
 						className="h-full"
@@ -26,7 +27,7 @@ function Planner() {
 							appActions.setTab(value as "plan" | "places")
 						}
 					>
-						<TabsList>
+						<TabsList className="w-full md:w-fit">
 							<TabsTrigger value="plan">Itinerary</TabsTrigger>
 							<TabsTrigger value="places">Places</TabsTrigger>
 						</TabsList>

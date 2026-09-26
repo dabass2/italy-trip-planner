@@ -71,7 +71,7 @@ export function PlaceCard({
 					: "border-transparent bg-surface hover:border-olive-leaf-200",
 			)}
 		>
-			<CardHeader>
+			<CardHeader className="px-4 md:px-6">
 				<CardTitle className="truncate text-lg font-bold">
 					{place.name}
 				</CardTitle>
@@ -90,7 +90,7 @@ export function PlaceCard({
 					</div>
 				</CardDescription>
 			</CardHeader>
-			<CardContent>
+			<CardContent className="px-4 md:px-6">
 				<p className={!selected ? "truncate" : undefined}>
 					{place.description}
 				</p>

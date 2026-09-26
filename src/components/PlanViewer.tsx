@@ -86,6 +86,7 @@ export function PlanViewer() {
 												<Button
 													variant="ghost"
 													size="icon-xs"
+													className="max-md:size-8"
 													aria-label="Move up"
 													disabled={stopIdx === 0}
 													onClick={() =>
@@ -97,6 +98,7 @@ export function PlanViewer() {
 												<Button
 													variant="ghost"
 													size="icon-xs"
+													className="max-md:size-8"
 													aria-label="Move down"
 													disabled={stopIdx === day.stops.length - 1}
 													onClick={() =>
