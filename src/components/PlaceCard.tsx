@@ -68,7 +68,7 @@ export function PlaceCard({
 			className={cn(
 				"cursor-pointer gap-2 rounded-2xl py-4 shadow-none transition-[background-color,border-color]",
 				selected
-					? "border-foreground bg-surface-raised"
+					? "border-foreground bg-olive-leaf-100"
 					: "border-transparent bg-surface hover:border-olive-leaf-200",
 			)}
 		>
@@ -79,15 +79,16 @@ export function PlaceCard({
 				<CardAction>
 					<PriceLevel level={place.priceLevel} />
 				</CardAction>
-				<CardDescription className="flex min-w-0 items-center gap-2">
-					<Badge
-						className={cn("px-2 py-1 uppercase tracking-widest", tone.badge)}
-					>
+				<CardDescription className="flex flex-col min-w-0 gap-2">
+					<Badge className={cn("uppercase", tone.badge)}>
 						{place.type.replaceAll("_", " ")}
 					</Badge>
-					<span className="truncate">
-						{place.city} · {place.hoursText ?? "Anytime"}
-					</span>
+					<div>
+						<span className={!selected ? "truncate" : undefined}>
+							{place.city}
+						</span>{" "}
+						- <span>{place.hoursText ?? "Anytime"}</span>
+					</div>
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -95,12 +96,8 @@ export function PlaceCard({
 					{place.description}
 				</p>
 			</CardContent>
-			<CardAction className="flex items-center justify-between gap-2 px-4 w-full">
-				<Button
-					variant="secondary"
-					className="self-end"
-					onClick={(e) => e.stopPropagation()}
-				>
+			<CardAction className="flex items-center justify-end px-4 w-full">
+				<Button variant="secondary" onClick={(e) => e.stopPropagation()}>
 					<Plus />
 					Add To Plan
 				</Button>
