@@ -2,16 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, MoveDown, X } from "lucide-react";
 import { appActions } from "#/lib/app-store";
 import { planActions, usePlan } from "#/lib/plan-store";
-import { cn, distanceKm, getColorForDay } from "#/lib/utils";
+import {
+	cn,
+	distanceKm,
+	formatDuration,
+	getColorForDay,
+} from "#/lib/utils";
 import { placesQueryOptions } from "#/utils/places.functions";
 import { Button } from "./ui/button";
-
-function formatDuration(minutes: number) {
-	const h = Math.floor(minutes / 60);
-	const m = minutes % 60;
-	if (h === 0) return `${m}m`;
-	return m === 0 ? `${h}h` : `${h}h ${m}m`;
-}
 
 function formatDistance(km: number) {
 	if (km < 1) return `${Math.round(km * 100) * 10} m`;

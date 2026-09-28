@@ -18,6 +18,42 @@ export function getColorForDay(dayIndex: number) {
 	return DAY_COLORS[dayIndex % DAY_COLORS.length];
 }
 
+const TYPE_TONES = {
+	brick: {
+		index: "bg-blushed-brick-300",
+		badge: "bg-blushed-brick-100 text-blushed-brick-800",
+	},
+	baltic: {
+		index: "bg-baltic-blue-300",
+		badge: "bg-baltic-blue-100 text-baltic-blue-800",
+	},
+	olive: {
+		index: "bg-olive-leaf-300",
+		badge: "bg-olive-leaf-100 text-olive-leaf-800",
+	},
+};
+
+const TONE_BY_TYPE: Record<string, keyof typeof TYPE_TONES> = {
+	restaurant: "brick",
+	cafe: "brick",
+	market: "brick",
+	experience: "baltic",
+	shop: "baltic",
+};
+
+/** Colour classes for a place type; unlisted types fall back to olive. */
+export function toneFor(type: string) {
+	return TYPE_TONES[TONE_BY_TYPE[type] ?? "olive"];
+}
+
+/** Formats a duration in minutes as e.g. "45m", "2h" or "1h 30m". */
+export function formatDuration(minutes: number) {
+	const h = Math.floor(minutes / 60);
+	const m = minutes % 60;
+	if (h === 0) return `${m}m`;
+	return m === 0 ? `${h}h` : `${h}h ${m}m`;
+}
+
 const EARTH_RADIUS_KM = 6371;
 
 type LatLng = { latitude: number; longitude: number };

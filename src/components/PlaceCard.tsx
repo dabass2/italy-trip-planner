@@ -1,6 +1,8 @@
 import { cn } from "cn";
 import type { places } from "#/db/schema";
+import { toneFor } from "#/lib/utils";
 import { AddToPlanMenu } from "./AddToPlanMenu";
+import { PlaceDetailDialog } from "./PlaceDetailDialog";
 import { PriceLevel } from "./PriceLevel";
 import { Badge } from "./ui/badge";
 import {
@@ -13,33 +15,6 @@ import {
 } from "./ui/card";
 
 type Place = typeof places.$inferSelect;
-
-const tones = {
-	brick: {
-		index: "bg-blushed-brick-300",
-		badge: "bg-blushed-brick-100 text-blushed-brick-800",
-	},
-	baltic: {
-		index: "bg-baltic-blue-300",
-		badge: "bg-baltic-blue-100 text-baltic-blue-800",
-	},
-	olive: {
-		index: "bg-olive-leaf-300",
-		badge: "bg-olive-leaf-100 text-olive-leaf-800",
-	},
-};
-
-const typeTones: Record<string, keyof typeof tones> = {
-	restaurant: "brick",
-	cafe: "brick",
-	market: "brick",
-	experience: "baltic",
-	shop: "baltic",
-};
-
-function toneFor(type: string) {
-	return tones[typeTones[type] ?? "olive"];
-}
 
 export function PlaceCard({
 	place,
@@ -95,7 +70,8 @@ export function PlaceCard({
 					{place.description}
 				</p>
 			</CardContent>
-			<CardAction className="flex items-center justify-end px-4 w-full">
+			<CardAction className="flex items-center justify-end gap-2 px-4 w-full">
+				<PlaceDetailDialog place={place} badgeClassName={tone.badge} />
 				<AddToPlanMenu placeId={place.placeId} />
 			</CardAction>
 		</Card>
