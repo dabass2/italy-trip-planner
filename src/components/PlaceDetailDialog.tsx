@@ -36,7 +36,6 @@ function DetailRow({
 	);
 }
 
-/** Opens the shared place details dialog. Safe to use inside clickable cards. */
 export function PlaceDetailsButton({
 	placeId,
 	iconOnly = false,
@@ -90,6 +89,7 @@ function PlaceDetailContent({ place }: { place: Place }) {
 		.filter(Boolean)
 		.join(", ");
 	const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`;
+	const appleMapsUrl = `https://maps.apple.com/?ll=${place.latitude},${place.longitude}&q=${encodeURIComponent(place.name)}`;
 
 	return (
 		<DialogContent className="max-h-[90dvh] overflow-y-auto rounded-2xl">
@@ -133,12 +133,20 @@ function PlaceDetailContent({ place }: { place: Place }) {
 			</dl>
 
 			<DialogFooter className="items-center sm:justify-between">
-				<Button variant="outline" asChild>
-					<a href={googleMapsUrl} target="_blank" rel="noreferrer">
-						<MapPin />
-						Open in Google Maps
-					</a>
-				</Button>
+				<div className="flex gap-2 max-sm:w-full">
+					<Button variant="outline" className="max-sm:flex-1" asChild>
+						<a href={googleMapsUrl} target="_blank" rel="noreferrer">
+							<MapPin />
+							Google Maps
+						</a>
+					</Button>
+					<Button variant="outline" className="max-sm:flex-1" asChild>
+						<a href={appleMapsUrl} target="_blank" rel="noreferrer">
+							<MapPin />
+							Apple Maps
+						</a>
+					</Button>
+				</div>
 				<AddToPlanMenu placeId={place.placeId} />
 			</DialogFooter>
 		</DialogContent>
