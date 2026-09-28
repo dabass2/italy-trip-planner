@@ -20,6 +20,7 @@ import type { places } from "#/db/schema";
 import { useAppState } from "#/lib/app-store";
 import { getColorForDay } from "#/lib/utils";
 import { AddToPlanMenu } from "./AddToPlanMenu";
+import { PlaceDetailsButton } from "./PlaceDetailDialog";
 
 type Place = typeof places.$inferSelect;
 
@@ -99,8 +100,10 @@ export default function PlanMapClient({ groups }: { groups: PlaceGroup[] }) {
 									{place.city} · {place.type.replaceAll("_", " ")}
 									<br />
 									{place.priceRange} · ★ {place.rating}
-									<br />
-									<AddToPlanMenu placeId={place.placeId} inlineView />
+									<div className="flex items-center gap-2">
+										<PlaceDetailsButton placeId={place.placeId} />
+										<AddToPlanMenu placeId={place.placeId} inlineView />
+									</div>
 								</Popup>
 							);
 

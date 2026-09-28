@@ -2,7 +2,7 @@ import { cn } from "cn";
 import type { places } from "#/db/schema";
 import { toneFor } from "#/lib/utils";
 import { AddToPlanMenu } from "./AddToPlanMenu";
-import { PlaceDetailDialog } from "./PlaceDetailDialog";
+import { PlaceDetailsButton } from "./PlaceDetailDialog";
 import { PriceLevel } from "./PriceLevel";
 import { Badge } from "./ui/badge";
 import {
@@ -71,7 +71,7 @@ export function PlaceCard({
 				</p>
 			</CardContent>
 			<CardAction className="flex items-center justify-end gap-2 px-4 w-full">
-				<PlaceDetailDialog place={place} badgeClassName={tone.badge} />
+				<PlaceDetailsButton placeId={place.placeId} />
 				<AddToPlanMenu placeId={place.placeId} />
 			</CardAction>
 		</Card>

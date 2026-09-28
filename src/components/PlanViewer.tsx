@@ -2,13 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, MoveDown, X } from "lucide-react";
 import { appActions } from "#/lib/app-store";
 import { planActions, usePlan } from "#/lib/plan-store";
-import {
-	cn,
-	distanceKm,
-	formatDuration,
-	getColorForDay,
-} from "#/lib/utils";
+import { cn, distanceKm, formatDuration, getColorForDay } from "#/lib/utils";
 import { placesQueryOptions } from "#/utils/places.functions";
+import { PlaceDetailsButton } from "./PlaceDetailDialog";
 import { Button } from "./ui/button";
 
 function formatDistance(km: number) {
@@ -106,6 +102,9 @@ export function PlanViewer() {
 													<ChevronDown />
 												</Button>
 											</div>
+											{place && (
+												<PlaceDetailsButton placeId={place.placeId} iconOnly />
+											)}
 											<Button
 												variant="ghost"
 												size="icon-sm"

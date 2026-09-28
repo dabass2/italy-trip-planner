@@ -40,7 +40,10 @@ type PlaceSortMenuProps = {
 
 const DEFAULT_SORT = "default";
 
-export function PlaceSortMenu({ sortOption, setSortOption }: PlaceSortMenuProps) {
+export function PlaceSortMenu({
+	sortOption,
+	setSortOption,
+}: PlaceSortMenuProps) {
 	const stop = (e: SyntheticEvent) => e.stopPropagation();
 
 	const active = sortOptions.find(
