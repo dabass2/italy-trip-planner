@@ -107,7 +107,7 @@ function PlaceDetailContent({ place }: { place: Place }) {
 			<dl className="flex flex-col gap-2 text-sm">
 				<DetailRow label="Rating">{place.rating} ★</DetailRow>
 				<DetailRow label="Price">
-					<PriceLevel level={place.priceLevel} /> · {place.priceRange}
+					<PriceLevel level={place.priceLevel} />
 				</DetailRow>
 				{place.durationMinutes !== null && (
 					<DetailRow label="Time needed">
