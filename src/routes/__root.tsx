@@ -4,6 +4,7 @@ import {
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
+import { SplashScreen } from "../components/SplashScreen";
 import appCss from "../styles.css?url";
 
 interface MyRouterContext {
@@ -21,7 +22,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "Italy Trip Planner",
+				title: "Amore · Italy Trip Planner",
 			},
 		],
 		links: [
@@ -41,6 +42,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="[overflow-wrap:anywhere] selection:bg-blushed-brick-200">
+				<SplashScreen />
 				{/* <Header /> */}
 				{children}
 				{/* <Footer /> */}
