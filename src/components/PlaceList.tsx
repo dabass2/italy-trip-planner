@@ -4,7 +4,7 @@ import { useState } from "react";
 import { placesQueryOptions } from "#/utils/places.functions";
 import { PlaceCard } from "./PlaceCard";
 import { PlaceFilterChip } from "./PlaceFilterChip";
-import { PlaceFilterMenu, type SortOption } from "./PlaceFilterMenu";
+import { PlaceSortMenu, type SortOption } from "./PlaceSortMenu";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export function PlaceList() {
@@ -87,7 +87,10 @@ export function PlaceList() {
 							<Search />
 						</InputGroupAddon>
 					</InputGroup>
-					<PlaceFilterMenu setSortOption={setSortOption} />
+					<PlaceSortMenu
+						sortOption={sortOption}
+						setSortOption={setSortOption}
+					/>
 				</div>
 
 				<div className="flex flex-row gap-2 min-w-0 overflow-x-auto scrollbar-none">

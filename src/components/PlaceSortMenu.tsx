@@ -33,17 +33,14 @@ export type SortOption = {
 	direction: (typeof sortOptions)[number]["direction"] | null;
 };
 
-type PlaceFilterMenuProps = {
+type PlaceSortMenuProps = {
 	sortOption: SortOption;
 	setSortOption: Dispatch<SetStateAction<SortOption>>;
 };
 
 const DEFAULT_SORT = "default";
 
-export function PlaceFilterMenu({
-	sortOption,
-	setSortOption,
-}: PlaceFilterMenuProps) {
+export function PlaceSortMenu({ sortOption, setSortOption }: PlaceSortMenuProps) {
 	const stop = (e: SyntheticEvent) => e.stopPropagation();
 
 	const active = sortOptions.find(
