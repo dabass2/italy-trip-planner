@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
+import { Heart, House, NotepadText } from "lucide-react";
 
 const NAV_LINKS = [
-	{ to: "/", label: "Home" },
-	{ to: "/planner", label: "Planner" },
+	{ to: "/", label: "Home", icon: House },
+	{ to: "/planner", label: "Planner", icon: NotepadText },
 ] as const;
 
 export default function Header() {
@@ -23,8 +23,9 @@ export default function Header() {
 						key={link.to}
 						to={link.to}
 						activeOptions={{ exact: true }}
-						className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[status=active]:bg-olive-leaf-100 data-[status=active]:text-foreground"
+						className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[status=active]:bg-olive-leaf-100 data-[status=active]:text-foreground"
 					>
+						<link.icon className="size-4" aria-hidden="true" />
 						{link.label}
 					</Link>
 				))}

@@ -1,4 +1,5 @@
 import { cn } from "cn";
+import { MapPin, Star } from "lucide-react";
 import type { places } from "#/db/schema";
 import { toneFor } from "#/lib/utils";
 import { AddToPlanMenu } from "./AddToPlanMenu";
@@ -50,18 +51,23 @@ export function PlaceCard({
 				<CardTitle className="truncate text-lg font-bold">
 					{place.name}
 				</CardTitle>
-				<CardAction>
-					<PriceLevel level={place.priceLevel} /> · {place.rating} ★
+				<CardAction className="flex items-center gap-1">
+					<PriceLevel level={place.priceLevel} /> ·
+					<Star className="size-3.5 fill-current text-blushed-brick" />
+					{place.rating}
 				</CardAction>
 				<CardDescription className="flex flex-col min-w-0 gap-2">
 					<Badge className={cn("uppercase", tone.badge)}>
 						{place.type.replaceAll("_", " ")}
 					</Badge>
-					<div>
-						<span className={!selected ? "truncate" : undefined}>
-							{place.city}
-						</span>{" "}
-						- <span>{place.hoursText ?? "Anytime"}</span>
+					<div className="flex items-start gap-1">
+						<MapPin className="mt-[3px] size-3.5 shrink-0" />
+						<span className="min-w-0">
+							<span className={!selected ? "truncate" : undefined}>
+								{place.city}
+							</span>{" "}
+							- <span>{place.hoursText ?? "Anytime"}</span>
+						</span>
 					</div>
 				</CardDescription>
 			</CardHeader>
@@ -70,7 +76,7 @@ export function PlaceCard({
 					{place.description}
 				</p>
 			</CardContent>
-			<CardAction className="flex items-center justify-end gap-2 px-4 w-full">
+			<CardAction className="mt-auto flex items-center justify-end gap-2 px-4 w-full">
 				<PlaceDetailsButton placeId={place.placeId} />
 				<AddToPlanMenu placeId={place.placeId} />
 			</CardAction>

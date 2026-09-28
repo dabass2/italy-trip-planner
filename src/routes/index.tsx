@@ -1,16 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Star } from "lucide-react";
-import { AddToPlanMenu } from "#/components/AddToPlanMenu";
-import {
-	PlaceDetailDialog,
-	PlaceDetailsButton,
-} from "#/components/PlaceDetailDialog";
-import { Badge } from "#/components/ui/badge";
+import { ArrowRight } from "lucide-react";
+import { PlaceCard } from "#/components/PlaceCard";
+import { PlaceDetailDialog } from "#/components/PlaceDetailDialog";
 import { Button } from "#/components/ui/button";
 import { appActions } from "#/lib/app-store";
 import { usePlan } from "#/lib/plan-store";
-import { cn, getColorForDay, toneFor } from "#/lib/utils";
+import { cn, getColorForDay } from "#/lib/utils";
 import { placesQueryOptions } from "#/utils/places.functions";
 
 export const Route = createFileRoute("/")({
@@ -187,34 +183,12 @@ function Home() {
 						/>
 						<div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 							{topPicks.map((place) => (
-								<article
+								<PlaceCard
 									key={place.placeId}
-									className="flex flex-col gap-3 rounded-2xl bg-surface p-4"
-								>
-									<div className="flex items-center justify-between gap-2">
-										<Badge
-											className={cn("uppercase", toneFor(place.type).badge)}
-										>
-											{place.type.replaceAll("_", " ")}
-										</Badge>
-										<span className="flex items-center gap-1 text-sm font-semibold">
-											<Star className="size-3.5 fill-current text-blushed-brick" />
-											{place.rating}
-										</span>
-									</div>
-									<div className="min-w-0">
-										<h3 className="truncate text-lg font-bold">{place.name}</h3>
-										<p className="flex items-center gap-1 text-sm text-muted-foreground">
-											<MapPin className="size-3.5 shrink-0" />
-											{place.city}
-										</p>
-									</div>
-									<p className="line-clamp-2 text-sm">{place.description}</p>
-									<div className="mt-auto flex items-center justify-end gap-2">
-										<PlaceDetailsButton placeId={place.placeId} />
-										<AddToPlanMenu placeId={place.placeId} />
-									</div>
-								</article>
+									place={place}
+									// Nothing to highlight on a map here, so a click opens the details.
+									onSelect={() => appActions.openPlaceDetails(place.placeId)}
+								/>
 							))}
 						</div>
 					</section>
