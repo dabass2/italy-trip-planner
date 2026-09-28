@@ -17,8 +17,8 @@ function Planner() {
 		<>
 			{/* Shared by the place cards, plan stops and map pins. */}
 			<PlaceDetailDialog />
-			{/* Small screens stack the map above the panel; wider ones sit side by side. */}
-			<div className="flex flex-col gap-2 m-2 h-[calc(100dvh-1rem)] md:grid md:grid-cols-12 md:gap-4 md:m-4 md:h-[calc(100dvh-2rem)]">
+			{/* Fills the space below the header. Small screens stack the map above the panel; wider ones sit side by side. */}
+			<div className="flex flex-1 min-h-0 flex-col gap-2 m-2 mt-0 md:grid md:grid-cols-12 md:gap-4 md:m-4 md:mt-0">
 				<div className="h-[40dvh] shrink-0 md:h-auto md:col-span-7 md:min-h-0 lg:col-span-8">
 					<PlanMap />
 				</div>

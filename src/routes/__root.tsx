@@ -4,6 +4,7 @@ import {
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
+import Header from "../components/Header";
 import { SplashScreen } from "../components/SplashScreen";
 import appCss from "../styles.css?url";
 
@@ -41,24 +42,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body className="[overflow-wrap:anywhere] selection:bg-blushed-brick-200">
+			<body className="flex h-dvh flex-col overflow-hidden [overflow-wrap:anywhere] selection:bg-blushed-brick-200">
 				<SplashScreen />
-				{/* <Header /> */}
+				<Header />
 				{children}
-				{/* <Footer /> */}
-				{/* <TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-						StoreDevtools,
-						TanStackQueryDevtools,
-					]}
-				/> */}
 				<Scripts />
 			</body>
 		</html>
