@@ -4,6 +4,7 @@ import { Info, MapPin } from "lucide-react";
 import type { ReactNode, SyntheticEvent } from "react";
 import type { places } from "#/db/schema";
 import { appActions, useAppState } from "#/lib/app-store";
+import { appleMapsPlaceUrl, googleMapsPlaceUrl } from "#/lib/map-links";
 import { formatDuration, toneFor } from "#/lib/utils";
 import { placesQueryOptions } from "#/utils/places.functions";
 import { AddToPlanMenu } from "./AddToPlanMenu";
@@ -88,8 +89,8 @@ function PlaceDetailContent({ place }: { place: Place }) {
 	const location = [place.neighborhood, place.city, place.region]
 		.filter(Boolean)
 		.join(", ");
-	const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`;
-	const appleMapsUrl = `https://maps.apple.com/?ll=${place.latitude},${place.longitude}&q=${encodeURIComponent(place.name)}`;
+	const googleMapsUrl = googleMapsPlaceUrl(place);
+	const appleMapsUrl = appleMapsPlaceUrl(place);
 
 	return (
 		<DialogContent className="max-h-[90dvh] overflow-y-auto rounded-2xl">

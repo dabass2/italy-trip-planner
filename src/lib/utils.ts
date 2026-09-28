@@ -56,7 +56,7 @@ export function formatDuration(minutes: number) {
 
 const EARTH_RADIUS_KM = 6371;
 
-type LatLng = { latitude: number; longitude: number };
+export type LatLng = { latitude: number; longitude: number };
 
 /** Straight-line (great-circle) distance between two points, in kilometres. */
 export function distanceKm(a: LatLng, b: LatLng) {

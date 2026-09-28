@@ -1,8 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp, MoveDown, X } from "lucide-react";
+import { ChevronDown, ChevronUp, MoveDown, Route, X } from "lucide-react";
 import { appActions } from "#/lib/app-store";
+import { appleMapsRouteUrl, googleMapsRouteUrls } from "#/lib/map-links";
 import { planActions, usePlan } from "#/lib/plan-store";
-import { cn, distanceKm, formatDuration, getColorForDay } from "#/lib/utils";
+import {
+	cn,
+	distanceKm,
+	formatDuration,
+	getColorForDay,
+	type LatLng,
+} from "#/lib/utils";
 import { placesQueryOptions } from "#/utils/places.functions";
 import { PlaceDetailsButton } from "./PlaceDetailDialog";
 import { Button } from "./ui/button";
@@ -10,6 +17,37 @@ import { Button } from "./ui/button";
 function formatDistance(km: number) {
 	if (km < 1) return `${Math.round(km * 100) * 10} m`;
 	return km < 10 ? `${km.toFixed(1)} km` : `${Math.round(km)} km`;
+}
+
+function RouteLink({ href, label }: { href: string; label: string }) {
+	return (
+		<Button variant="ghost" size="xs" asChild>
+			<a href={href} target="_blank" rel="noreferrer">
+				<Route />
+				{label}
+			</a>
+		</Button>
+	);
+}
+
+/** Opens the day's stops, in order, as a driving route. */
+function DayRouteLinks({ stops }: { stops: LatLng[] }) {
+	if (stops.length === 0) return null;
+
+	const googleUrls = googleMapsRouteUrls(stops);
+
+	return (
+		<div className="flex flex-wrap items-center justify-end">
+			{googleUrls.map((url, i) => (
+				<RouteLink
+					key={url}
+					href={url}
+					label={googleUrls.length > 1 ? `Google Maps ${i + 1}` : "Google Maps"}
+				/>
+			))}
+			<RouteLink href={appleMapsRouteUrl(stops)} label="Apple Maps" />
+		</div>
+	);
 }
 
 export function PlanViewer() {
@@ -22,7 +60,14 @@ export function PlanViewer() {
 		<div className="flex h-full flex-col gap-3 overflow-y-auto scrollbar-track-transparent">
 			{days.map((day, dayIdx) => (
 				<div key={day.id}>
-					<p className="font-bold">Day {dayIdx + 1}</p>
+					<div className="flex items-center justify-between gap-2">
+						<p className="font-bold">Day {dayIdx + 1}</p>
+						<DayRouteLinks
+							stops={day.stops
+								.map((stop) => placesById.get(stop.placeId))
+								.filter((p) => !!p)}
+						/>
+					</div>
 					{day.stops.length === 0 ? (
 						<div className="grid place-items-center rounded-2xl bg-surface p-6 text-center text-sm text-muted-foreground">
 							<span>
