@@ -28,7 +28,7 @@ function Planner() {
 						}
 					>
 						<TabsList className="w-full md:w-fit">
-							<TabsTrigger value="plan">Itinerary</TabsTrigger>
+							<TabsTrigger value="plan">My Plan</TabsTrigger>
 							<TabsTrigger value="places">Places</TabsTrigger>
 						</TabsList>
 						<TabsContent value="plan" className="min-h-0">

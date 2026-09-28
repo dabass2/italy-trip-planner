@@ -4,12 +4,18 @@ import { useState } from "react";
 import { placesQueryOptions } from "#/utils/places.functions";
 import { PlaceCard } from "./PlaceCard";
 import { PlaceFilterChip } from "./PlaceFilterChip";
+import { PlaceFilterMenu, type SortOption } from "./PlaceFilterMenu";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export function PlaceList() {
 	const { data, isLoading, isError } = useQuery(placesQueryOptions);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [typeFilter, setTypeFilter] = useState<string | null>(null);
+	const [sortOption, setSortOption] = useState<SortOption>({
+		option: null,
+		direction: null,
+	});
+
 	const [search, setSearch] = useState("");
 
 	if (isLoading) {
@@ -42,17 +48,33 @@ export function PlaceList() {
 	const typeCounts = new Map<string, number>(
 		data.map((place) => [place.type, 0]),
 	);
+
 	for (const place of searchedPlaces) {
 		typeCounts.set(place.type, (typeCounts.get(place.type) ?? 0) + 1);
 	}
+
 	const filteredPlaces = typeFilter
 		? searchedPlaces.filter((place) => place.type === typeFilter)
 		: searchedPlaces;
 
+	const { option, direction } = sortOption;
+	const sortedPlaces =
+		option && direction
+			? [...filteredPlaces].sort((a, b) => {
+					const av = a[option];
+					const bv = b[option];
+					if (av === bv) return 0;
+					// Missing values always go last, regardless of direction
+					if (av === null) return 1;
+					if (bv === null) return -1;
+					return direction === "asc" ? av - bv : bv - av;
+				})
+			: filteredPlaces;
+
 	return (
 		<div className="flex h-full flex-col gap-2">
 			<div className="flex shrink-0 flex-col gap-2">
-				<div>
+				<div className="flex flex-row gap-2 min-w-0">
 					<InputGroup>
 						<InputGroupInput
 							type="search"
@@ -65,6 +87,7 @@ export function PlaceList() {
 							<Search />
 						</InputGroupAddon>
 					</InputGroup>
+					<PlaceFilterMenu setSortOption={setSortOption} />
 				</div>
 
 				<div className="flex flex-row gap-2 min-w-0 overflow-x-auto scrollbar-none">
@@ -88,7 +111,7 @@ export function PlaceList() {
 			</div>
 
 			<div className="relative flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto scrollbar-track-transparent">
-				{filteredPlaces.map((place) => (
+				{sortedPlaces.map((place) => (
 					<PlaceCard
 						key={place.placeId}
 						place={place}
